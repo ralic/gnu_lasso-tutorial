@@ -1,0 +1,6 @@
+http://localhost/~sylvain/lasso/login.php
+-> 302
+http://www.example.com/liberty/singleSignOn?RequestID=_45E9C8A2C876EA5F60F1921AD7461564&MajorVersion=1&MinorVersion=2&IssueInstant=2007-04-13T17%3A36%3A36Z&ProviderID=https%3A%2F%2Fsp.example.com%2F&ForceAuthn=false&IsPassive=false&NameIDPolicy=federated&consent=urn%3Aliberty%3Aconsent%3Aobtained&SigAlg=http%3A%2F%2Fwww.w3.org%2F2000%2F09%2Fxmldsig%23rsa-sha1&Signature=oh5Hnad6bSCMXPeFJO6NHBOmRixG7aXaMN87R9najfVKJ3menNIin7yI5JhkHfYJtz4zK3%2FCTC2yuFuCC9xESQ%3D%3D
+-> 302
+assertion.php (query_string = SAML artifact)
+-> soap -> example.com/soapEndPoint -> Yes/No

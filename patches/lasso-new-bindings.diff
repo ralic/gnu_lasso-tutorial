@@ -1,0 +1,29 @@
+Original incomplete patch to build PHP5 bindings
+http://lists.labs.libre-entreprise.org/pipermail/lasso-devel/2007-December/001958.html
+Index: configure.ac
+===================================================================
+--- configure.ac	(révision 3460)
++++ configure.ac	(copie de travail)
+@@ -914,6 +914,10 @@
+ win32/nsis/lasso-full.nsi
+ win32/nsis/lasso-lite.nsi
+ win32/nsis/python.nsi
++bindings/Makefile
++bindings/python/Makefile
++bindings/python/tests/Makefile
++bindings/php5/Makefile
+ ])
+ 
+ languages_available=`echo $languages_available | sed -e "s/^ //" `
+Index: Makefile.am
+===================================================================
+--- Makefile.am	(révision 3460)
++++ Makefile.am	(copie de travail)
+@@ -22,6 +22,7 @@
+ 		  $(PHP4_SD) $(PHP5_SD) $(PYTHON_SD) $(JAVA_SD) $(PERL_SD) \
+ 		  tests \
+ 		  win32 \
++		  bindings \
+ 		  docs
+ 
+ ABS_BUILDDIR	= $(shell pwd)

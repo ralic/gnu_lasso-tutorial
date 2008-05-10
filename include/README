@@ -1,0 +1,8 @@
+soap.php:
+
+From project "Implement Liberty Alliance authentication in Spip"
+http://labs.libre-entreprise.org/projects/liberty-sid/
+svn://labs.libre-entreprise.org/svnroot/liberty-sid/trunk/spip/liberty/soap.inc
+
+db.php: from Savane:
+http://git.savannah.gnu.org/gitweb/?p=savane-cleanup.git;a=history;f=frontend/php/include/database.php

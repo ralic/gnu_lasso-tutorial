@@ -1,0 +1,147 @@
+Install the Lasso tutorial
+==========================
+
+If you haven't installed Lasso already, see Appendix A.
+
+You need the following extensions:
+
+ - php5-mysql
+
+ - php5-lasso
+
+MySQL
+-----
+
+You need to populate the database:
+
+/var/www/lasso_tutorial$ mysql
+mysql> CREATE DATABASE lasso_tutorial;
+mysql> use lasso_tutorial;
+mysql> \. db/init.sql
+
+Edit include/config.php for match your MySQL settings.
+
+URLs
+----
+
+We'll add the following aliases to /etc/hosts to ease this first
+installation::
+
+  echo "127.0.0.1 authentic.local sp.local" >> /etc/hosts
+
+You now can point your browser to http://sp.local/
+
+Edit the sp/sp-metadata.xml and idp/idp-metadata.xml file to use your
+own URLs.
+
+
+Appendix A: install Lasso bindings
+==================================
+
+# Based on Debian Etch
+
+cd /usr/src
+mkdir la
+cd /usr/src/la
+
+aptitude --assume-yes install build-essential
+aptitude --assume-yes install autoconf automake libtool swig pkg-config libglib2.0-dev
+aptitude --assume-yes install libxml2-dev libxslt1-dev libxmlsec1-dev libssl-dev
+aptitude --assume-yes install php5-dev libexpat1-dev
+aptitude --assume-yes install python-dev python-celementtree
+aptitude --assume-yes install subversion
+svn checkout svn://labs.libre-entreprise.org/svnroot/lasso/trunk lasso
+cd lasso
+# New PHP5 bindings
+aptitude --assume-yes install -t etch-backports bzr
+bzr branch http://perso.entrouvert.org/~fred/bzr/bindings/
+patch -p0 < ../lasso-new-php5-bindings.diff
+# Back to normal compilation
+sh autogen.sh --prefix=/usr --enable-python --enable-php5 --disable-perl --disable-php4 --disable-java
+# --prefix=/usr: install lasso.so in /usr/lib/php... instead of
+#   /usr/local/lib/php... (which is not recognized)
+# --enable-php5: enable PHP5 bindings, off by default
+# --disable-perl: optional, for faster compilation, since we don't need it here
+# --disable-php4: it's mistakenly detected under Debian Lenny 1/2008
+make
+make install
+
+# If you're on Lenny, you'll probably need this, as dynamic module
+loading is disabled by default:
+echo "extension=lasso.so" > /etc/apache2/conf.d/lasso.ini
+
+
+Appendix A.1: variant, using prebuilt packages
+==============================================
+
+cat <<EOF > /etc/apt/sources.list
+deb http://deb.entrouvert.org/ etch-experimental main
+EOF
+aptitude install liblasso3 liblasso3-dev
+# (version published jan 15)
+cd bindings
+make install # will use liblasso3-dev
+
+
+Appendix B: installing Apache and MySQL
+=======================================
+
+Under Debian Etch, for example:
+aptitude install mysql-server
+aptitude install apache2 libapache2-mod-suphp php5-mysql
+
+<VirtualHost *>
+   ServerAdmin webmaster@localhost
+   ServerName sp.local
+   DocumentRoot /home/sylvain/public_html/lasso_tutorial/
+
+   <Directory "/home/sylvain/public_html/lasso_tutorial/">
+     Options All
+     AllowOverride All
+   </Directory>
+</VirtualHost>
+
+
+Appendix C: installing Authentic
+================================
+
+Cf. http://doc.cliss21.com/index.php?title=Lasso for installing
+Authentic if needed.
+
+
+Appendix D: refreshing the PHP5 bindings patch
+==============================================
+
+svn diff > ../lasso-new-php5-bindings.diff
+bzr diff -p bindings/:bindings/ bindings/ >> ../lasso-new-php5-bindings.diff
+
+
+Appendix 5: install another SP: w.c.s.
+======================================
+
+svn co svn://labs.libre-entreprise.org/svnroot/wcs/trunk wcs
+python setup.py install
+
+useradd --home /var/lib/wcs wcs
+mkdir -m 755 /var/lib/wcs
+chown wcs: /var/lib/wcs
+
+sudo -u wcs wcsctl.py start
+
+<VirtualHost *>
+  ServerAdmin webmaster@localhost
+  ServerName wcs.local
+  DocumentRoot /usr/share/wcs/web/
+
+  SCGIMount / 127.0.0.1:3001
+  <LocationMatch "^/(css|images|js)/.*">
+    SCGIHandler off
+  </LocationMatch>
+</VirtualHost>
+
+Follow this documentation to have w.c.s. use Liberty Alliance
+authentication:
+http://wcs.labs.libre-entreprise.org/doc/fr/#head-98e2a8ab6cda2102d633b68f413201f8da5ef7fe
+
+Then declare w.c.s. as a Service Provider to your IdP (such as
+Authentic, using its admin interface).

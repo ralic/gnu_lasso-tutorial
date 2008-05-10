@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<EntityDescriptor providerID="my-liberty-provider-id" xmlns="urn:liberty:metadata:2003-08">
+<IDPDescriptor protocolSupportEnumeration="urn:liberty:iff:2003-08">
+<KeyDescriptor use="signing">
+    <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+      <ds:KeyValue>-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDMOvmRSnHbS/xJAEMvUrqjxCq1
+YOr1wo8vsH8Qw8ef/mdmeQMFOPKaUItz0c6o9MH+rVQRIE/hhU38UlAGOJ0fDiJf
+bJfTFPW4omY0aThNxdJB8ywzQIbcIQ9bM4Xc0aUV0wmtXZPgEsxF6oRY3iwQWsGX
+UznLYk+zWl4Qa49wiQIDAQAB
+-----END PUBLIC KEY-----
+</ds:KeyValue>
+    </ds:KeyInfo>
+  </KeyDescriptor>
+
+
+  <SoapEndpoint>http://authentic.local/liberty/soapEndpoint</SoapEndpoint>
+
+  <SingleLogoutServiceURL>http://authentic.local/liberty/singleLogout</SingleLogoutServiceURL>
+  <SingleLogoutServiceReturnURL>http://authentic.local/liberty/singleLogoutReturn</SingleLogoutServiceReturnURL>
+
+  <FederationTerminationServiceURL>http://authentic.local/liberty/federationTermination</FederationTerminationServiceURL>
+  <FederationTerminationServiceReturnURL>http://authentic.local/liberty/federationTerminationReturn</FederationTerminationServiceReturnURL>
+  <FederationTerminationNotificationProtocolProfile>http://projectliberty.org/profiles/fedterm-idp-soap</FederationTerminationNotificationProtocolProfile>
+  <FederationTerminationNotificationProtocolProfile>http://projectliberty.org/profiles/fedterm-idp-http</FederationTerminationNotificationProtocolProfile>
+  <FederationTerminationNotificationProtocolProfile>http://projectliberty.org/profiles/fedterm-sp-soap</FederationTerminationNotificationProtocolProfile>
+  <FederationTerminationNotificationProtocolProfile>http://projectliberty.org/profiles/fedterm-sp-http</FederationTerminationNotificationProtocolProfile>
+
+  <SingleLogoutProtocolProfile>http://projectliberty.org/profiles/slo-idp-soap</SingleLogoutProtocolProfile>
+  <SingleLogoutProtocolProfile>http://projectliberty.org/profiles/slo-idp-http</SingleLogoutProtocolProfile>
+  <SingleLogoutProtocolProfile>http://projectliberty.org/profiles/slo-sp-soap</SingleLogoutProtocolProfile>
+  <SingleLogoutProtocolProfile>http://projectliberty.org/profiles/slo-sp-http</SingleLogoutProtocolProfile>
+
+  <RegisterNameIdentifierProtocolProfile>http://projectliberty.org/profiles/rni-idp-soap</RegisterNameIdentifierProtocolProfile>
+  <RegisterNameIdentifierProtocolProfile>http://projectliberty.org/profiles/rni-idp-http</RegisterNameIdentifierProtocolProfile>
+  <RegisterNameIdentifierProtocolProfile>http://projectliberty.org/profiles/rni-sp-soap</RegisterNameIdentifierProtocolProfile>
+  <RegisterNameIdentifierProtocolProfile>http://projectliberty.org/profiles/rni-sp-http</RegisterNameIdentifierProtocolProfile>
+  <RegisterNameIdentifierServiceURL>http://authentic.local/liberty/registerNameIdentifier</RegisterNameIdentifierServiceURL>
+  <RegisterNameIdentifierServiceReturnURL>http://authentic.local/liberty/registerNameIdentifierReturn</RegisterNameIdentifierServiceReturnURL>
+
+  <SingleSignOnServiceURL>http://authentic.local/liberty/singleSignOn</SingleSignOnServiceURL>
+  <SingleSignOnProtocolProfile>http://projectliberty.org/profiles/brws-art</SingleSignOnProtocolProfile>
+  <SingleSignOnProtocolProfile>http://projectliberty.org/profiles/brws-post</SingleSignOnProtocolProfile>
+
+</IDPDescriptor>
+
+
+<Organization>
+      <OrganizationName>Cliss XXI</OrganizationName>
+    </Organization>
+
+    </EntityDescriptor>

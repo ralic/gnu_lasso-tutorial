@@ -1,0 +1,42 @@
+Generate public and private keys
+================================
+
+openssl genrsa -out sp-priv.pem
+# stronger key: openssl genrsa -out sp-priv.pem 2048
+openssl rsa -in sp-priv.pem -pubout > sp-pub.pem
+
+
+Permissions
+===========
+
+APACHE_USER=www-data
+chmod 640 sp-priv.pem
+chgrp $APACHE_USER sp-priv.pem
+chmod 644  sp-pub.pem
+
+
+IdP
+===
+
+Place your Identity Provider meta-data and public key in this
+directory.
+
+ - 'idp-metadata.xml'
+
+ - 'idp-sign-pub.pem' (public key or x509 certificate)
+
+In principle you do not have access to 'sign-priv.pem'.
+
+
+Generate IdP keys
+=================
+
+If you installed your own Identity Provider (such as Authentic) for
+your test install, but didn't generate IdP keys yet, you can generate
+them this way::
+
+ for i in idp_sign idp_crypt;
+ do
+ 	openssl genrsa -out $i-priv.pem
+ 	openssl rsa -in $i-priv.pem -pubout > $i-pub.pem
+ done

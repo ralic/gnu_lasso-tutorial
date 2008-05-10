@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<EntityDescriptor
+    providerID="lasso_tutorial-IDFF" xmlns="urn:liberty:metadata:2003-08">
+  <SPDescriptor>
+    <SingleLogoutServiceURL>http://sp.local/lasso/endpoints/logout.php</SingleLogoutServiceURL>
+    <SingleLogoutProtocolProfile>http://projectliberty.org/profiles/slo-sp-soap</SingleLogoutProtocolProfile>
+    <SoapEndpoint>http://sp.local/lasso/soap.php</SoapEndpoint>
+    <AssertionConsumerServiceURL id="AssertionConsumerServiceURL1" isDefault="true">http://sp.local/liberty/service_urls/assertion_consumer.php</AssertionConsumerServiceURL>
+    <AuthnRequestsSigned>true</AuthnRequestsSigned>
+  </SPDescriptor>
+</EntityDescriptor>

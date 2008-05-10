@@ -1,0 +1,20 @@
+<?php
+# Here's who to process assertion attributes (check
+# lasso/bindings/php5/examples):
+
+$assertion = $lassoLogin->response->assertion[0];
+
+# Debug:
+#print '<pre>';
+#print htmlspecialchars($assertion->dump());
+#print '</pre>';
+
+foreach ($assertion->attributeStatement[0]->attribute as $attribute) {
+  if ($attribute->name == LASSO_SAML2_ATTRIBUTE_NAME_EPR) {
+    continue;
+  }
+  echo 'attribute : ' . $attribute->name . "\n";
+  foreach ($attribute->attributeValue as $value) {
+    echo '  value : ' . $value->any[0]->content . "\n";
+  }
+}

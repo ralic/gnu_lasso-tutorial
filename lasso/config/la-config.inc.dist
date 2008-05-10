@@ -1,0 +1,15 @@
+<?php
+// Lasso Identity provider
+// Using the same identifiers as 'scalp' for those 3:
+$lasso_SPMetadataFilename   = dirname(__FILE__) . '/../sp/sp-metadata.xml';
+$lasso_SPPrivateKeyFilename = dirname(__FILE__) . '/../sp/sp-priv.pem';
+$lasso_IdPMetadataFilename  = dirname(__FILE__) . '/../idp/idp-metadata.xml';
+
+// Those are redundant (present in idp-metadata) and not in 'scalp' -
+// they could extracted from the metadata:
+$lasso_idpProviderId_IDFF12 = 'my-liberty-provider-id';
+$lasso_idpProviderId_SAML20 = 'http://authentic.local/saml/metadata';
+$lasso_idpPublicKeyFilename = dirname(__FILE__) . '/../idp/sign-pub.pem';
+// Protocols: LASSO_PROTOCOL_LIBERTY_1_0, LASSO_PROTOCOL_LIBERTY_1_1,
+// LASSO_PROTOCOL_LIBERTY_1_2, LASSO_PROTOCOL_SAML_2_0
+$lasso_protocol = LASSO_PROTOCOL_SAML_2_0;

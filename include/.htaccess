@@ -1,0 +1,3 @@
+# include files are not meant to be called directly
+Order Allow,Deny
+Deny from all

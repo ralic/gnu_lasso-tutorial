@@ -1,0 +1,8 @@
+This is a very simple application to demonstrate how to use Lasso in a
+PHP5 project.
+
+It mostly follows the documentation at:
+http://lasso.entrouvert.org/documentation/writing-a-php-sp.html
+
+Some additional documentation (that need to be merged in this project)
+can be found at: http://doc.cliss21.com/index.php?title=Lasso
