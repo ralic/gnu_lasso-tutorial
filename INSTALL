@@ -52,11 +52,6 @@ aptitude --assume-yes install python-dev python-celementtree
 aptitude --assume-yes install subversion
 svn checkout svn://labs.libre-entreprise.org/svnroot/lasso/trunk lasso
 cd lasso
-# New PHP5 bindings
-aptitude --assume-yes install -t etch-backports bzr
-bzr branch http://perso.entrouvert.org/~fred/bzr/bindings/
-patch -p0 < ../lasso-new-php5-bindings.diff
-# Back to normal compilation
 sh autogen.sh --prefix=/usr --enable-python --enable-php5 --disable-perl --disable-php4 --disable-java
 # --prefix=/usr: install lasso.so in /usr/lib/php... instead of
 #   /usr/local/lib/php... (which is not recognized)
@@ -69,18 +64,6 @@ make install
 # If you're on Lenny, you'll probably need this, as dynamic module
 loading is disabled by default:
 echo "extension=lasso.so" > /etc/apache2/conf.d/lasso.ini
-
-
-Appendix A.1: variant, using prebuilt packages
-==============================================
-
-cat <<EOF > /etc/apt/sources.list
-deb http://deb.entrouvert.org/ etch-experimental main
-EOF
-aptitude install liblasso3 liblasso3-dev
-# (version published jan 15)
-cd bindings
-make install # will use liblasso3-dev
 
 
 Appendix B: installing Apache and MySQL
@@ -109,14 +92,7 @@ Cf. http://doc.cliss21.com/index.php?title=Lasso for installing
 Authentic if needed.
 
 
-Appendix D: refreshing the PHP5 bindings patch
-==============================================
-
-svn diff > ../lasso-new-php5-bindings.diff
-bzr diff -p bindings/:bindings/ bindings/ >> ../lasso-new-php5-bindings.diff
-
-
-Appendix 5: install another SP: w.c.s.
+Appendix D: install another SP: w.c.s.
 ======================================
 
 svn co svn://labs.libre-entreprise.org/svnroot/wcs/trunk wcs
